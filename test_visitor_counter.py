@@ -1,7 +1,12 @@
+import sys
+import os
 import pytest
 from unittest.mock import patch, MagicMock
 import json
 from decimal import Decimal
+
+sys.path.insert (0, os.path.abspath (os.path.dirname (__file__)))
+
 from visitor_counter_function import lambda_handler
 
 @patch ("visitor_counter_function.boto3.resource")
