@@ -24,18 +24,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r hello_world/requirements.txt  
+          python -m pip install --upgrade pip
+          pip install -r hello_world/requirements.txt
+          pip install pytest boto3
 
       - name: Run Tests
-        run: |
-          pytest test_visitor_counter.py 
+        run: pytest test_visitor_counter.py
 
-      - name: Install Dependencies
-        run: |
-          pip install -r hello_world/requirements.txt  
-      - name: Run Tests
-        run: |
-          pytest test_visitor_counter.py 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -46,5 +41,4 @@ jobs:
       - name: Deploy with AWS SAM
         run: |
           sam build
-          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
