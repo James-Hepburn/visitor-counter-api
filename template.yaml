@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  VisitorCounterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: VisitorCounterFunction-SAM
+      Handler: app.lambda_handler
+      Runtime: python3.11
+      CodeUri: hello_world/
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+            Resource: "arn:aws:dynamodb:us-east-1:911167928151:table/VisitorCount"
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /visitors
+            Method: get
+
