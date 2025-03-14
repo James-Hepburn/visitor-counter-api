@@ -9,6 +9,8 @@ sys.path.insert (0, os.path.abspath (os.path.dirname (__file__)))
 
 from visitor_counter_function import lambda_handler
 
+# trigger github actions
+
 @patch ("visitor_counter_function.boto3.resource")
 def test_lambda_handler_success (mock_dynamodb_resource):
     mock_table = MagicMock ()
